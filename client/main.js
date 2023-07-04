@@ -1,7 +1,7 @@
-console.log('hello js!');
+// console.log('hello js!');
 
-const a = 10;
+// const a = 10;
 
 
-const b = 10;
+// const b = 10;
 
