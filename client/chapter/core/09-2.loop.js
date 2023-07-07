@@ -32,7 +32,7 @@ do {
 	console.log(count);
 }
  */
-
+/* 
 let repeat = prompt('몇번 반복하시겠습니까?', 0);
 
 do {
@@ -46,13 +46,55 @@ do {
 
 	repeat--;
 } while(repeat)
-
-
-
-
-
-
-
+ */
 
 // do ~ while 문 (순환)
 // - 위 do ~ while 문을 순방향으로 순환되도록 설정
+
+
+let first = document.querySelector('.first');
+let second = document.querySelector('.second');
+ 
+// first = first.nextSibling;
+
+// do {
+// 	first = first.nextSibling;
+
+// } while (first.nodeType !== document.ELEMENT_NODE);
+
+
+// // 반복문 멈추는 시점 => 무한루프
+
+// console.log(first);
+
+function next(node) {
+	do {
+		node = node.nextSibling;
+	} while (node.nodeType !== 1)
+	
+	return node;
+}
+
+function prev(node) {
+	do {
+		node = node.previousSibling;
+	} while(node.nodeType !== 1)
+	return node;
+}
+
+
+// 다음 태그 요소가 선택되길 원함
+const nextTag = next(first);
+
+const preTag = prev(second);
+
+console.log(nextTag);
+
+console.log(preTag);
+
+
+
+
+
+
+// 로직 실행
