@@ -16,9 +16,10 @@ let i = 0;
 let l = frontEndDev.length;
 
 while (i < l) {
-  // console.log(frontEndDev[i]);
+  console.log(frontEndDev[i]);
   i += 1;
 }
+
 
 // while 문 → for 문 (순환)
 // - 실행 흐름
@@ -44,12 +45,15 @@ for (let i = 0; i < frontEndDev.length; i++) {
 
 
 
+
+
 //   - 무한 루프 (브레이크)
 //   - for 문 (역순환)
 
 for (let i = frontEndDev.length - 1; i >= 0; i--) {
 	console.log(frontEndDev[i]);
 }
+
 
 let zero = 0;
 for (let i = l; zero < i;){
