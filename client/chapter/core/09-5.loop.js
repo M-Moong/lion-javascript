@@ -2,6 +2,28 @@
 /* For Of Loop     */
 /* --------------- */
 
+
+// iterable(반복 가능한) = String, Array, Array-like
+
+const arrayLike = {
+	0: 'body',
+	1: 'head',
+	2: 'div',
+	length: 3
+}
+
+const str = '유사배열입니다.';
+
+for (const value of str) {
+	// console.log(value);
+}
+
+// 인덱스 [ ]
+// length
+
+
+
+
 const languages = [
   {
     id: 'ecma-262',
@@ -28,6 +50,30 @@ const languages = [
     currentVersion: 8,
   },
 ];
+
+for (let value of languages) {
+	const name = value.name;
+
+	// if (name == 'Java') continue;
+
+	// name이 'Java' 문자를 포함하고 있다면 break;
+	
+	
+	if (name.includes('Java') && name.length < 5) break;
+	
+	// console.log(name);
+}
+
+
+
+
+
+
+
+
+
+
+
 
 // for ~ of 문
 // - 특정 조건에서 건너띄기
@@ -73,5 +119,71 @@ const randomUser = {
 
 // 객체의 키, 값 순환
 // - for ~ in 문
+
+// 객체 안의 모든 객체들을 확인하기 위해 쓰는 함수 (객체 in 객체 in 객체)
+/* 
+for (let key in randomUser) {
+	if ({}.hasOwnProperty.call(randomUser, key)) {
+		let L1 = randomUser[key];
+
+		if (typeof L1 === 'object') {
+			console.log('L1' , L1);
+			
+			for (let key in L1) {
+				if (({}).hasOwnProperty.call(L1,key)) {
+					let L2 = L1[key];
+
+					if (typeof L2 === 'object') {
+								console.log('L2' , L2);
+
+						for (let key in L2) {
+							if (({}).hasOwnProperty.call(L2, key)) {
+								let L3 = L2[key];
+								console.log("L3" , L3);
+							}
+						}
+					}
+				}
+			}
+		}
+  }
+} */
+
+
 // - for ~ of 문
+
+// Object.keys()
+// Object.values()
+// Object.entries() 객체 자체의 열거가능한 속성 key, value를 가진 쌍의 배열을 반환,,
+
+// console.log( Object.entries(randomUser) );
+
+for (let keyValue of Object.entries(randomUser)) {
+
+	let key = keyValue[0];
+	let value = keyValue[1];
+
+	console.log('L1 : ', value);
+
+	if (typeof value === 'object') {
+		for (let keyValue of Object.entries(value)) {
+			let key = keyValue[0];
+			let value = keyValue[1];
+
+			console.log('\tL2 : ', value);
+
+			if (typeof value === 'object') {
+				for (let keyValue of Object.entries(value)) {
+					let key = keyValue[0];
+					let value = keyValue[1];
+					
+					console.log('\t\tL3 : ', value);
+				}
+			}
+		}
+	}
+}
+
+
+
 // - 성능 비교 진단
