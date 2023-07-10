@@ -162,7 +162,9 @@ let IIFE;
 
 // 변수의 보호
 // 은닉화 incapsulation(캡슐화)
-const MASTER = (function (){
+const MASTER = (function (g){
+
+  console.log(g);
 
   var x = 10;
   let uid = 'Ajttk753!@';
@@ -176,7 +178,7 @@ const MASTER = (function (){
     }
   };
 
-})()
+})(window)
 
 
 
