@@ -21,6 +21,7 @@ while (i < l) {
 }
 
 
+
 // while 문 → for 문 (순환)
 // - 실행 흐름
 // - 순환 중단 또는 이어서 순환
@@ -32,12 +33,14 @@ while (i < l) {
 
 for (let i = 0; i < frontEndDev.length; i++) {
 
-	let value = frontEndDev[i];
-	let lower = value.toLowerCase();
+	let value = frontEndDev[i];					//  각 인덱스의 값
+	let lower = value.toLowerCase();		// 소문자로 다 바꾸어 대소문자 상관없이 출력하기 위함.
 
+	// - 조건: SVG, jQuery는 출력하지 마세요.
 	if (lower.includes('svg') || lower.includes('jquery')) continue;
 
 	console.log(value);
+	// - 조건: JavaScript 까지만 출력하세요.
 	if (lower.includes('javascript')) break;
 }
 
