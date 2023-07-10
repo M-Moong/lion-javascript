@@ -93,36 +93,36 @@ const result = calculateTotal(1000, 500, 200, 6500);
 /* -------------------------------------------------------------------------- */
 
 
-// 익명(이름이 없는) 함수 (표현)식
+//@ 익명(이름이 없는) 함수 (표현)식
 let anonymousFunctionExpression = function (){
 	
 };
 
-// 유명(이름을 가진) 함수 (표현)식
+//@ 유명(이름을 가진) 함수 (표현)식
 let namedFunctionExpression = function hello(){
 
 };
 
-// 콜백 함수 (표현)식
-let callbackFunctionExpression = function (isActive, success, fail) {
+//@ 콜백 함수 (표현)식
+// let callbackFunctionExpression = function (isActive, success, fail) {
 	
-	// 내부적으로 처리하는 것
-	// const callback = function() { console.log('콜백 함수 실행!') }
+// 	// 내부적으로 처리하는 것
+// 	// const callback = function() { console.log('콜백 함수 실행!') }
 
-	if (isActive) {
-		success();
-		return;
-	} else {
-		fail();
-	}
+// 	if (isActive) {
+// 		success();
+// 		return;
+// 	} else {
+// 		fail();
+// 	}
 	
-};
+// };
 
-callbackFunctionExpression(
-	true,
-	function () { console.log('성공!~'); },
-	function () { console.log('실패!~'); }
-)
+// callbackFunctionExpression(
+// 	true,
+// 	function () { console.log('성공!~'); },
+// 	function () { console.log('실패!~'); }
+// )
 
 
 //# 콜백 함수 예시
@@ -180,14 +180,14 @@ const MASTER = (function (){
 
 
 
-// return 값을 받는다.
-console.log(MASTER);
+// // return 값을 받는다.
+// console.log(MASTER);
 
-// key 값을 가져온다.
-console.log(MASTER.getKey());
+// // key 값을 가져온다.
+// console.log(MASTER.getKey());
 
-// key 값을 세팅한다.
-console.log(MASTER.setKey('새로운 비밀번호로 세팅해버리기~'));
+// // key 값을 세팅한다.
+// console.log(MASTER.setKey('새로운 비밀번호로 세팅해버리기~'));
 
 
 
