@@ -4,7 +4,8 @@
 
 /* Primitives vs. Object --------- */
 
-// key:value 쌍으로 구성된 엔티티(entity) 데이터 구조
+//# key:value 쌍으로 구성된 엔티티(entity) 데이터 구조
+
 
 let htmlCode = /* html */ `
   <ul>
@@ -42,6 +43,14 @@ let cssMap = {
   transform: "translate(-50%, -50%)"
 };
 
+
+
+/* -------------------------------------------------------------------------- */
+
+
+// authorization : 권한
+// authentication : 인증
+
 // 인증 사용자 정보를 객체로 구성해봅니다.
 // 인증 사용자(authentication user)
 // - 이름
@@ -51,9 +60,6 @@ let cssMap = {
 
 let authUser = null;
 
-// authorization : 권한
-// authentication : 인증
-
 authUser = {
   uid: 'user-id-zWEF@#$',
   name: 'beom',
@@ -62,18 +68,17 @@ authUser = {
   permission: 'paid'  // free | paid
 }
 
-
 // console.log(authUser);
 
 
-// 점(.) 표기법
+//@ 점(.) 표기법
 // authUser 객체의 프로퍼티에 접근해 Console에 출력해봅니다.
 
-// console.log(authUser.uid);
-// console.log(authUser.permission);
-// console.log(authUser.email);
+// console.log(authUser.uid);           //  user-id-zWEF@#$
+// console.log(authUser.permission);    //  paid
+// console.log(authUser.email);         //  tmfdfldjfil@naver.com
 
-// 대괄호([]) 표기법
+//@ 대괄호([]) 표기법 - 변수값으로 사용할떄는 대괄호만 사용하여야한다.
 // 유료 사용자 권한(paid User Rights) 이름으로 프로퍼티를 재정의하고
 // 대괄호 표기법을 사용해 접근 Console에 출력해봅니다.
 
