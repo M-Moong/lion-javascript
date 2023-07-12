@@ -300,7 +300,7 @@ console.log(green);
 
 /* ------------------------------- 
 //* 객체 구조 분해 할당 destructuring assignments
-//* 순서가 정해져있지 않다. 변수의 이름을 바꿀수 있을까? yes
+//* 순서가 정해져있지 않다.(키값만 같게 설정) 변수의 이름을 바꿀수 있을까? yes
 //* 기본값도 설정해줄수 있다.
 ------------------------------ */
 
@@ -312,7 +312,7 @@ const salaries = {
 }
 
 //@ 구조 분해할당하면 아래 4줄이 한줄로 완료!
-const { 권혜미, 이수연, 강예나, 김태일 } = salaries;
+const { 권혜미:미미 = 'mimi', 이수연 = 'su', 강예나, 김태일 } = salaries;
 
 
 //* 원래 할당 해줘야 하는 방식
@@ -322,10 +322,13 @@ const { 권혜미, 이수연, 강예나, 김태일 } = salaries;
 // const 김태일 = salaries.김태일;
 
 
-console.log(권혜미);
+// console.log(권혜미);
 
 
 function setElementCss(options) {
+
+  // let width = options.width;
+  // let color = options.color;
 
   const {
     width:w = 100,
