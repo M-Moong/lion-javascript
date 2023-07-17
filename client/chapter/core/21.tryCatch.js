@@ -79,7 +79,7 @@ let data = JSON.stringify({
 });
 
 
-try {
+try {			//# 에러가 날 것같은 구문.
 	
 	const user = JSON.parse(data);
 
@@ -87,7 +87,7 @@ try {
 		throw new ReferenceError('해당 키 값은 존재하지 않습니다.');
 	}
 	
-} catch (e) {
+} catch (e) {    //# 에러가 나면 실행시킬 구문.
 	
 	console.log('JSON Error : ' + e.message);
 
@@ -95,6 +95,8 @@ try {
 
 	document.body.innerHTML = `404 not found`;
 
+} finally {			//# 에러가 나도 실행되는 구문.
+	console.log(' 에러가 발생해도 해당 코드는 작동합니다. ');
 }
 
 
