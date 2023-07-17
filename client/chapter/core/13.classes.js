@@ -16,7 +16,7 @@ class Animal {
 
 	//% 생성자 (필수)
 	constructor(name) {
-		this.name = name
+		this.name = name;
 	}
 
 	set eat(food) {
@@ -33,7 +33,7 @@ class Tiger extends Animal {
 
 	prey = '';
 
-	constructor(name, pattern) {
+	constructor(name, pattern, age) {
 		super(name)		//% 부모 생성자 함수호출?
 		this.pattern = pattern;
 	}

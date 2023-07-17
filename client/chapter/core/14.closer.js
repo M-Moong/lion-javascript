@@ -63,6 +63,32 @@ let result = counter();
 
 
 
+/* -------------------------------------------------------------------------- */
+const bindEvent = (node, type, handler) => {
+  if (typeof node === 'string') {
+    node = document.querySelector(node);
+  }
+
+  node.addEventListener('click', handler);
+
+  return () => node.removeEventListener(type, handler);
+};
+
+
+
+function handleClick() {
+  console.log('hit');
+}
+
+
+
+const remove = bindEvent('.first', 'click', handleClick);
+
+setTimeout(() => {
+  remove();
+}, 3000);
+/* -------------------------------------------------------------------------- */
+
 
 
 

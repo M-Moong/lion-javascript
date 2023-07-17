@@ -20,18 +20,18 @@ let friends = '진승,혜미,송이,효윤,선용,승민,상호,영은,희소'.s
 friends[0] = '선범'
 
 // 배열 요소 추가 - 변수에 인덱스 번호가 담긴다.
-let unshift = friends.unshift('진승');	//& 앞 요소 추가
-console.log(friends);
+// let unshift = friends.unshift('진승');	//& 앞 요소 추가
+// console.log(friends);
 
-let push = friends.push('동균');	//& 뒤 요소 추가
-console.log(friends);
+// let push = friends.push('동균');	//& 뒤 요소 추가
+// console.log(friends);
 
-// 배열 요소 제거 - 변수에 제거되는 대상이 담긴다.
-let shift = friends.shift();	//& 앞 요소 제거
-console.log(friends);
+// // 배열 요소 제거 - 변수에 제거되는 대상이 담긴다.
+// let shift = friends.shift();	//& 앞 요소 제거
+// console.log(friends);
 
-let pop = friends.pop();	//& 뒤 요소 제거
-console.log(friends);
+// let pop = friends.pop();	//& 뒤 요소 제거
+// console.log(friends);
 
 
 // 큐(queue) vs. 스택(stack)
@@ -41,8 +41,25 @@ console.log(friends);
 // 배열 요소 순환(loop)
 // for 문, for ~ of문
 
+for (let i = 0; i < friends.length; i++) {
+  console.log(friends[i]);  
+}
+
+for (let value of friends) {
+  console.log(value);
+}
+
 // 배열 복사
-let copiedArray;
+// 1.
+// let copiedArray = [...friends];
+// 2.
+// let copiedArray = friends.slice();
+// 3.
+// let copiedArray = friends.toSorted();
+
+// console.log(copiedArray);
+
+
 
 // 다차원 배열
 // 행렬을 저장하는 용도
