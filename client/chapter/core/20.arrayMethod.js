@@ -140,12 +140,37 @@ console.log(toReversed);
 const toSpliced = arr.toSpliced(2, 0, 'javascript', 'css', 'react');
 console.log(toSpliced);
 
+
+//$ 중요1. map
+//? 기존 항목을 재구성해서 새로운 배열을 반환할 경우 사용. like getter
+//* 1. 밑의 코드의 경우 접근성 문제 및 잘 읽히지 않는다.
+// people.map((item, index) => item.profession )
+//* 2. <div> 요소 넣기 - 콤마가 같이 생성
+// const job = people.map((item, index) => {
+//   return `<div>${item.profession}</div>`
+// })
+
+//# 태그 만들기 - map : 요소 재구성을 통해 화면에 반환하기
+const job = people.map((item, index)=>{
+  return /* html */`
+    <div class="userCard">
+      <div class="imageField">
+        <img src="#" alt="" />
+      </div>
+      <span>이름: ${item.name}</span>
+      <span>직업: ${item.profession}</span>
+      <span>나이: ${item.age}</span>
+    </div>
+  `
+  //  <img src="${item.imageSrc}" alt="" />
+})
+
+
 //&&&& map - 매우 중요하다고 강조해주심
 // 1.
 // const job = people.map((item) => {
 //   return `<div>${item.profession}</div>`
 // })
-
 // // document.body.insertAdjacentHTML('beforeend', item);
 
 // // , 를 없애기 위해서 아이템들만 넣어주기 위해 forEach를 사용하였다.

@@ -53,6 +53,12 @@ clearInterval(cancelInterval)
 // http://localhost:5500/index.html?type=listing&page=2#title : 해쉬 (hash)
 
 
+// location.replace() -> 원하는 링크로 이동(뒤로가기 불가)
+// location.href() -> 원하는 링크로 이동(뒤로가기 가능)
+// location.reload() -> 새로고침
+
+
+
 
 const { href, protocol, host, port, search, hash, replace, reload } = location;
 
@@ -74,7 +80,7 @@ const urlParams = new URLSearchParams(location.search);
 // userAgent : 브라우저와 운영체제 정보를 반환
 // language : 브라우저에서 사용되는 언어를 반환
 // onLine : 브라우저가 온라인인지 여부를 반환
-// geolocation : 
+// geolocation : 위치정보를 가져온다.
 
 
 const { platform, userAgent, language, onLine, geolocation } = navigator;
@@ -140,6 +146,7 @@ function getLocationPosition() {
 // height : 모니터 사이즈
 // availHeight : 브라우저의 크기
 // innerHeight: 브라우저 해상도 크기
+// orientation : 모니터 방향
 
 const { width, height, availWidth, availHeight, orientation } = screen;
 
