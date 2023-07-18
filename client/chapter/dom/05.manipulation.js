@@ -42,6 +42,57 @@
 
 const body = document.body;
 
-body.insertAdjacentHTML('beforeend', '<div class="box">상자</div>');
+const h1 = getNode('h1');
+
+const template = `<div class="box"></div>`
+
+h1.insertAdjacentHTML('beforeend', template);
+
+
+
+
+/* -------------------------------------------------------------------------- */
+const data = ['빨래하기', '게임하기', '유튜브 보기', '산책하기', '공부'];
+const todo = getNode('.todo');
+
+//% 1. 태그를 생성하기
+// `<li></li>`
+
+//% 2. 태그 안에 아이템값 넣기
+// `<li>${data[0]}</li>`
+
+//% 3. 생성된 태그를 내보내기(배열)
+//^ 1. forEach => 반환 x
+//^ 2. reduce  => 아무거나
+//^ 3. filter  => 배열을 반환(걸러내는)
+//^ 4. map     => 배열을 반환
+//^ 5. for문
+const todoList = data.map((item) => {
+	return `<li>${item}</li>`
+})
+console.log(todoList);
+
+
+//% 4. 내보낸 배열 순환하기
+todoList.forEach((item) => {
+	//% 5. 반복문안에서 랜더링하기
+	// todo.insertAdjacentHTML('beforeend',item)
+	insertLast(todo, item);		//& 유틸함수 활용
+})
+
+
+
+//% 6. 랜더링
+// index안의 ul태그에 값 넣기
+// todo.insertAdjacentHTML('beforeend', todoList);
+
+// document.body.insertAdjacentHTML('beforeend', todoList)
+
+
+
+/* -------------------------------------------------------------------------- */
+
+
+
 
 
