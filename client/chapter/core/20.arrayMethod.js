@@ -59,7 +59,8 @@ const people = [
   },
 ];
 
-/* 요소 순환 -------------------------------------------------------------- */
+/* 요소 순환 
+-------------------------------------------------------------- */
 
 // forEach : 값을 따로 반환하지 않음.
 
@@ -166,7 +167,8 @@ const job = people.map((item, index)=>{
 })
 
 
-//&&&& map - 매우 중요하다고 강조해주심
+//&&&& map - (매우 중요하다고 강조해주심)
+
 // 1.
 // const job = people.map((item) => {
 //   return `<div>${item.profession}</div>`
@@ -180,6 +182,8 @@ const job = people.map((item, index)=>{
 
 // console.log(job);
 
+
+//# 태그 만들기 - map : 요소 재구성을 통해 화면에 반환하기
 // const job = people.map((item, index) => {
 //   return /* html */ `
 //     <div class="userCard">
