@@ -8,6 +8,7 @@
 // 1. HTML 속성 : onclick="handler()"
 // 2. DOM 프로퍼티 : element.onclick = handler
 // 3. 메서드 : element.addEventListener(event, handler[, phase])
+
 //@ 3번이 가장 베스트한 방식으로 이벤트를 걸고 있다. 3번을 가장 많이 쓴다
 //@ 2번 방식은 이벤트를 여러개 걸지 못한다. 함수를 하나만 실행시킬수 있다.(복수의 핸들러를 할당할 수 x)
 
@@ -60,14 +61,12 @@ function handleClick() {
 // click, mousemove, mouseover, mouseout, mousedown, mouseup
 // first.addEventListener('click', handleClick);
 
-
 // const remove = bindEvent('.first', 'click', handler);
 
 
 // setTimeout(() => {
 // 	remove()
 // }, 3000);
-
 
 
 // 이벤트 객체(event object)
@@ -89,8 +88,6 @@ function handleClick(e) {
 																	${ y - ball.offsetHeight / 2 }px)`;
 
 }
-
-
 
 
 ground.addEventListener('click', handleClick);
