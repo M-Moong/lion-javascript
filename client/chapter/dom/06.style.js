@@ -59,8 +59,8 @@ console.log(first.style.fontSize);
 
 
 // 아래 2개는 같은 구문이다.
-console.log(getComputedStyle(first).fontSize);
-console.log(getComputedStyle(first).getPropertyValue('font-size'));
+console.log(getComputedStyle(first).fontSize);				// 직접접근?
+console.log(getComputedStyle(first).getPropertyValue('font-size')); // 프로퍼티의 힘을 빌린다? 느낌
 
 
 

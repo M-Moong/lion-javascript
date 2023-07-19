@@ -65,9 +65,9 @@ first.removeAttribute('title');
 // console.log(first.attributes);
 
 // iterator를 가지고 있기 때문에 for..of문을 돌릴수 있다.
-// for (const item of first.attributes) {
-// 	console.log(item);
-// }
+for (const item of first.attributes) {
+	console.log(item);
+}
 
 
 first.getAttribute('id');	//	message
@@ -86,7 +86,7 @@ first.getAttribute('id');	//	message
 
 // 케밥케이스가 다 해제되고 카멜케이스로 들어가게된다.
 console.log(first.dataset);		// DOMStringMap {size: '10', tabIndex: '1'}
-console.log(first.dataset.size);
+console.log(first.dataset.size);			// 10
 console.log(first.dataset.tabIndex);		// getter
 
 console.log(first.dataset.animation = 'paused'); // setter
