@@ -7,16 +7,19 @@
 
 // 1. HTML 속성 : onclick="handler()"
 // 2. DOM 프로퍼티 : element.onclick = handler
-// 3. 메서드 : element.addEventListener(event, handler[, phase])
+//# 3. 메서드 : element.addEventListener(event, handler[, phase])
 
-//@ 3번이 가장 베스트한 방식으로 이벤트를 걸고 있다. 3번을 가장 많이 쓴다
+//@ 메서드 방식이 가장 많이 쓰이고 베스트다.!!
 //@ 2번 방식은 이벤트를 여러개 걸지 못한다. 함수를 하나만 실행시킬수 있다.(복수의 핸들러를 할당할 수 x)
+// 2번 예시 : element.onclick = handler    (x)
+//          element.onclick = hand       (o)   
+// 첫 선언이 씹히고 두번째 선언밖에 되지 않는다.
 
 
 /* 이벤트 추가/제거 
 --------------------------------------------------------- */
 
-// 디바운스 : 사용자가 막~~ 하다가 마우스를 멈추면 함수를 실행시킨다 (의미없는 행동 자제)
+//% 디바운스 : 사용자가 막~~ 하다가 마우스를 멈추면 함수를 실행시킨다 (의미없는 행동 자제)
 function debounce(callback, limit = 100) {
   let timeout;
   return function (...args) {
@@ -27,7 +30,7 @@ function debounce(callback, limit = 100) {
   };
 }
 
-// 쓰로틀 : 특정시간마다 함수를 실행할수 있도록 한다
+//% 쓰로틀 : 특정시간마다 함수를 실행할수 있도록 한다 (너무많이 실행되서 리소스 낭비를 막는것.)
 function throttle(callback, limit = 100) {
   let waiting = false;
   return function () {
@@ -41,7 +44,8 @@ function throttle(callback, limit = 100) {
   };
 }
 
-
+/* -----------------------------------
+--------------------------------------- */
 
 // - addEventListener
 // - removeEventListener
@@ -70,27 +74,25 @@ function handleClick() {
 // }, 3000);
 
 
-// 이벤트 객체(event object)
+//# 이벤트 객체(event object)
 // 이벤트가 발생하면 브라우저는 이벤트 객체라는 것을 만듭니다.
 // 객체에 이벤트에 관한 상세한 정보를 넣고, 핸들러의 인수로 형태를 전달한다.
 
 const ground = getNode('.ground');
 const ball = getNode('#ball');
 
-
 function handleClick(e) {
+  
+  let x = e.offsetX; // 마우스의 x좌표
+  let y = e.offsetY; // 마우스의 y좌표
 
-	let x = e.offsetX;
-	let y = e.offsetY;
+  // 마우스에 맞춰서 공을 움직이게해주기 위하여
+  // ball.style.transform = `translate(${x}px,${y}px)`;
 
-	// ball.style.transform = `translate(${x}px,${y}px)`;
-
-	ball.style.transform = `translate(${x - ball.offsetWidth / 2}px,
-																	${ y - ball.offsetHeight / 2 }px)`;
-
+  // 마우스 정중앙에 공이 오도록 이미지 크기의 반반으로 좌표 수정.
+  ball.style.transform = `translate(${x - ball.offsetWidth / 2}px, 
+  ${ y - ball.offsetHeight / 2 }px)`;
 }
 
 
 ground.addEventListener('click', handleClick);
-
-// 이벤트 객체
