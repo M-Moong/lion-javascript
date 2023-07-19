@@ -58,7 +58,8 @@ function handleClick() {
 	console.log('이벤트 메서드를 호출합니다.');
 }
 
-// click, mousemove, mouseover, mouseout, mousedown, mouseup
+//% 이벤트의 여러 종류
+//% click, mousemove, mouseover, mouseout, mousedown, mouseup ...
 // first.addEventListener('click', handleClick);
 
 // const remove = bindEvent('.first', 'click', handler);
