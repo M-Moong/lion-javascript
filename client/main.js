@@ -4,12 +4,10 @@ import {
 	diceAnimation,
 	getNode,
 	getNodes,
-	removeClass,
-	toggleClass,
 	attr,
-	css,
 	insertLast,
 	endScroll,
+	clearContents,
 
 } from "./lib/index.js";
 
@@ -31,7 +29,13 @@ import {
 // 				- hidden 속성 false 만들기
 // 				- 기록 버튼 이벤트 바인딩
 // 				- hidden 속성 false 만들기
-// 3. 
+// 3. 주사위 값을 가져와서 랜더링
+// 4. 스크롤 위치 내리기
+// 5. 함수 분리
+
+//# [phase-3] 초기화 시키기
+// 1. 아이템 지우기
+
 
 
 
@@ -128,6 +132,11 @@ function handleReset() {
 	invisibleElement(recordListWrapper)
 	disabledElement(recordButton);
 	disabledElement(resetButton);
+
+	clearContents(tbody);
+
+	count = 0;
+	total = 0;
 }
 
 startButton.addEventListener('click', handleRollingDice);
