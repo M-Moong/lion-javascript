@@ -7,9 +7,11 @@
 
 //? 동기적(Synchronous)은 모든 웹이 동기적으로 동작하는 것을 의미합니다. 사용자 인터페이스와 서버 간의 요청과 응답은 왔다갔다하여 사용자에게 꿈뻑거림(새로고침)을 유발합니다.
 
-//? 비동기적(Asynchronous)은 내용물의 일부만 바꿔치기하여 웹 페이지를 업데이트하는 방식을 말합니다. AJAX를 이용하면 브라우저에서 필요한 데이터만 요청하고 서버는 그에 대한 일부 데이터만 응답하게 됩니다. 이로 인해 화면이 새로고침 없이 부드럽게 애니메이션을 보여주는 싱글 페이지 어플리케이션(SPA) 등의 기법이 가능하며, 사용자 경험이 개선됩니다.
+//? 비동기적(Asynchronous)은 내용물의 일부만 바꿔치기하여 웹 페이지를 업데이트하는 방식을 말합니다. AJAX를 이용하면 브라우저에서 필요한 데이터만 요청하고 서버는 그에 대한 일부 데이터만 응답하게 됩니다. 
+//? 이로 인해 화면이 새로고침 없이 부드럽게 애니메이션을 보여주는 싱글 페이지 어플리케이션(SPA) 등의 기법이 가능하며, 사용자 경험이 개선됩니다.
 
-//? 브라우저는 내장된 AJAX 엔진을 사용하여 필요한 데이터를 요청하고, 서버는 해당 데이터의 일부만을 응답합니다. 서버에서 받은 정보는 주로 JSON 또는 XML 형식으로 문자화하여 브라우저에 전달되며, 브라우저에서는 이를 다시 해석하여 웹 페이지에 업데이트합니다.
+//? 브라우저는 내장된 AJAX 엔진을 사용하여 필요한 데이터를 요청하고, 서버는 해당 데이터의 일부만을 응답합니다. 서버에서 받은 정보는 주로 JSON 또는 XML 형식으로 `문자화`하여 브라우저에 전달되며, 
+//? 브라우저에서는 이를 다시 해석하여 웹 페이지에 업데이트합니다.
 
 //? 서버는 AJAX에게 응답하며, 데이터를 주로 JSON 또는 XML 형식으로 문자화하여 전달합니다. 브라우저에서는 받은 정보를 해석기로 다시 해석하여 웹 페이지에 표시합니다.
 
@@ -21,7 +23,7 @@
 //? XMLHttpRequest는 웹 브라우저에서 비동기적으로 서버와 데이터를 주고받기 위해 사용되는 JavaScript 객체입니다.
 //? 오래된 방식의 AJAX 엔진으로, 오래된 브라우저를 지원하는 데 유용합니다.
 //? 비동기적으로 데이터를 요청하고 응답을 처리할 수 있으며, 웹 페이지를 새로고침하지 않고도 데이터를 업데이트할 수 있습니다.
-//? 사용법이 복잡하고 코드가 장황할 수 있어서 가독성이 떨어지는 단점이 있습니다.
+//? 사용법이 복잡하고 코드가 장황할 수 있어서 가독성이 떨어지는 '단점'이 있습니다.
 
 //? Fetch API:
 
@@ -94,15 +96,18 @@
 */
 
 /* //# xhr의 기본 구조
-//@ 0번
+//@ 1. 객체 선언
 const xhr = new XMLHttpRequest();
 
-//@ 1번
+//% console.log('readyState : ' + xhr.readyState);  // readyState - 0번 (uninitialized)
+
+//@ 2. open
 xhr.open('GET', 'https://jsonplaceholder.typicode.com/users');
 
-//@ 2번
-xhr.addEventListener('readystatechange', () => {
+//% console.log('readyState : ' + xhr.readyState);  // readyState - 1번 (loading)
 
+//@ 3. 이벤트 추가
+xhr.addEventListener('readystatechange', () => {
 	const {status, readyState, response} = xhr
 
 	if (status >= 200 && status < 400) {
@@ -113,17 +118,23 @@ xhr.addEventListener('readystatechange', () => {
 		console.log('실패');
 	}
 
-	// console.log(xhr.status);
+	//^ console.log('status : ' + xhr.status);	// status : http 상태코드 - 200번
 
-	// console.log(xhr.readyState);
+	//% console.log('readyState : ' + xhr.readyState); // readyState - 2,3,4번
+	// ReadyState - 2,3,4번 동시 (loaded, interactive, complete) 
+	// 이벤트 안에 있으면 2,3,4가 다 공존한다.
 })
 
-// console.log(xhr.readyState);
+//% console.log('readyState : ' + xhr.readyState);	// readyState - 1번 (loading)
 
-//@ 3번
+//@ 4. send
 xhr.send();
 
  */
+
+
+
+
 /* callback------------------------
 ------------------------- */
 
@@ -139,48 +150,54 @@ export function xhr({
   'Content-Type':'application.json',
   'Access-Control-Allow-Origin':'*'
   } 
-} = {}) {
+} = {}) {	// 매개변수를 구조 분해 할당으로 바로 받아준다. ={}의 의미는 자료형을 명시 (객체)
 	
-	const xhr = new XMLHttpRequest();
+	const xhr = new XMLHttpRequest();		// XMLHttpRequest 생성
 
-	xhr.open(method, url);
+	xhr.open(method, url);		// 통신방법과 url로 open
 
-	Object.entries(headers).forEach(([key, value]) => {
+	Object.entries(headers).forEach(([key, value]) => {		// headers에 있는 값들을 xhr에 설정해준다.
 		xhr.setRequestHeader(key, value);
 	})
 	
-	xhr.addEventListener('readystatechange', () => {
-		const {status, readyState, response} = xhr;
+	xhr.addEventListener('readystatechange', () => {		// 이벤트 시작
+		const {status, readyState, response} = xhr;		// xhr의 객체에서 status, readyState, response 구조 분해 할당
 
-		if (readyState === 4) {
-			if (status >= 200 && status < 400) {
-				onSuccess(JSON.parse(response));
+		if (readyState === 4) {		// readState 4번은 complete 된 상태 
+			if (status >= 200 && status < 400) {	// http 상태코드가 에러가 없을시 실행
+				onSuccess(JSON.parse(response));		// 성공시 받은 데이터들을 파싱한다.
 			} else {
 				onFail('실패');
 			}
 		}
 	});
 
-	xhr.send(JSON.stringify(body));
+	xhr.send(JSON.stringify(body));		// post나 put 과 같이 값을 수정하거나 생성할떄 send
 }
 
-// method, body, header, url , onSuccess, onFail
 
-// xhr({
-// 	method: 'GET',
-// 	url:'https://jsonplaceholder.typicode.com/users',
-// 	onSuccess:()=> {},
-// 	onFail: () => { },
-// 	body: {
-// 		name: 'tiger'
-// 	},
-// 	headers: {
-// 		'Content-Type':'application/json',
-//     'Access-Control-Allow-Origin':'*'
-// 	}
-// });
+/* //# xhr함수 호출 부분.
+xhr({
+	method: 'GET',
+	url:'https://jsonplaceholder.typicode.com/users',
+	onSuccess:()=> {},
+	onFail: () => { },
+	body: {
+		name: 'tiger'
+	},
+	headers: {
+		'Content-Type':'application/json',
+    'Access-Control-Allow-Origin':'*'
+	}
+});
+ */
 
 
+//! Callback 동작 원리(onSuccess, result 부분)
+//! 실행부의 3번째 인수로 함수를 전달한다
+//! 선언부의 3번째 인자로 받은 함수는 const onSuccess = () => {}처럼 쓰일 수 있다.
+//! onSuccess(JSON.parse(response))는 인수는 다시 실행부의 인자로 전달되어 사용할 수 있다.
+//! 따라서, result값에 JSON.parse(reponse)가 들어가게 됨
 
 
 
@@ -194,6 +211,8 @@ export function xhr({
 // xhr.put()
 // xhr.delete()
 
+
+//& get과 delete는 body를 포함하지 않는다.
 xhr.get = (url, onSuccess, onFail) => {
 	xhr({
 		url,
@@ -202,12 +221,16 @@ xhr.get = (url, onSuccess, onFail) => {
 	})
 }
 
-/**
- * 
- * @param {*} url 
- * @param {*} onSuccess 
- * @param {*} onFail 
- */
+xhr.delete = (url, onSuccess, onFail) => {
+	xhr({
+		method:'DELETE',
+		url,
+		onSuccess,
+		onFail,
+	})
+}
+
+//& post와 put은 값을 직접 접근하기에 body이 필요하다.
 xhr.post = (url, onSuccess, onFail, body) => {
 	xhr({
 		method:'POST',
@@ -228,14 +251,6 @@ xhr.put = (body, url, onSuccess, onFail) => {
 	})
 }
 
-xhr.delete = (url, onSuccess, onFail) => {
-	xhr({
-		method:'DELETE',
-		url,
-		onSuccess,
-		onFail,
-	})
-}
 
 
 

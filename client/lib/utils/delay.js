@@ -13,7 +13,7 @@ const second = getNode('.second');
 
 
 
-
+//# Promise를 사용하지 않으면 콜백지옥처럼 코드가 되어버린다.
 // delay(()=>{
 //   console.log(1);
 //   first.style.top = '-100px';
@@ -37,8 +37,8 @@ const second = getNode('.second');
 function delayP(){
 
   return new Promise((resolve, reject) => {
-    // resolve('성공입니다!!')
-    reject('실패입니다!!')
+    resolve('성공입니다!!')
+    // reject('실패입니다!!')
   })
 
 }
@@ -51,5 +51,30 @@ delayP()
 
 
 
-// console.log(2);
-// console.log(3);
+//$ Promise 체이닝 미리보기
+function delay_P() {
+  return new Promise((성공, 실패) => {
+    setTimeout(() => {
+      성공('통신 성공');
+      // 실패('통신 실패!!');
+    }, 1000);
+  });
+}
+
+delay_P()
+.then((결과) => {
+  console.log('로직 실행');
+
+  return delay_P()
+  /* return new Promise((성공, 실패) => {
+    
+  }) */
+})
+.then((결과) => {
+  console.log('로직 실행');
+
+  return delay_P()
+})
+.then((결과) => {
+  console.log('로직 실행');
+})
