@@ -8,11 +8,11 @@ import {
 	insertLast,
 	endScroll,
 	clearContents,
-
+	memo
 } from "./lib/index.js";
 
 
-//# [phase-1] 주사위 굴릭
+//# [phase-1] 주사위 굴리기
 // 1. dice animation 불러오기
 // 2. 주사위 굴리기 버튼을 클릭하면 diceAnimation 실행 될 수 있도록
 // 					- 주사위 굴리기 버튼을 가져온다.
@@ -54,7 +54,10 @@ import {
 // 배열 구조 분해 할당
 const [startButton, recordButton, resetButton] = getNodes('.buttonGroup > button');
 const recordListWrapper = getNode('.recordListWrapper');
-const tbody = getNode('.recordList > tbody');
+// const tbody = getNode('.recordList > tbody');
+memo('@tbody', () => getNode('.recordList tbody'))	// setter
+
+memo('@tbody')	// getter
 
 function disabledElement(node) {
 	return node.disabled = true;
@@ -116,7 +119,7 @@ function renderRecordItem() {
 	// Record에 나타내어라
 	const diceValue = +attr('#cube', 'data-dice');	
 
-	insertLast(tbody, createItem(diceValue));	// 템플릿을 tbody에 삽입하는 함수
+	insertLast(memo('@tbody'), createItem(diceValue));	// 템플릿을 tbody에 삽입하는 함수
 
 	endScroll(recordListWrapper);		// 스크롤을 끝까지 내리는 함수
 }
@@ -133,7 +136,7 @@ function handleReset() {
 	disabledElement(recordButton);
 	disabledElement(resetButton);
 
-	clearContents(tbody);
+	clearContents(memo('@tbody'));
 
 	count = 0;
 	total = 0;
