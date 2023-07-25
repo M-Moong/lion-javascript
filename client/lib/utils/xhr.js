@@ -1,0 +1,259 @@
+//! AJAX란
+//? AJAX(Asynchronous JavaScript and XML)는 웹 페이지에서 비동기적으로 서버와 데이터를 주고받는 기술을 의미한다.
+
+//? JSON은 요즘에 많이 사용되는 데이터 교환 형식으로, AJAX에서 메타인 통신 도구로 사용됩니다. JSON은 JavaScript Object Notation의 약자로, 데이터를 효과적으로 표현하기 위해 사용됩니다.
+
+//? XML은 AJAX 탄생 당시에 주로 사용되던 메타 통신 도구이지만, 요즘은 JSON이 더 많이 사용됩니다.
+
+//? 동기적(Synchronous)은 모든 웹이 동기적으로 동작하는 것을 의미합니다. 사용자 인터페이스와 서버 간의 요청과 응답은 왔다갔다하여 사용자에게 꿈뻑거림(새로고침)을 유발합니다.
+
+//? 비동기적(Asynchronous)은 내용물의 일부만 바꿔치기하여 웹 페이지를 업데이트하는 방식을 말합니다. AJAX를 이용하면 브라우저에서 필요한 데이터만 요청하고 서버는 그에 대한 일부 데이터만 응답하게 됩니다. 이로 인해 화면이 새로고침 없이 부드럽게 애니메이션을 보여주는 싱글 페이지 어플리케이션(SPA) 등의 기법이 가능하며, 사용자 경험이 개선됩니다.
+
+//? 브라우저는 내장된 AJAX 엔진을 사용하여 필요한 데이터를 요청하고, 서버는 해당 데이터의 일부만을 응답합니다. 서버에서 받은 정보는 주로 JSON 또는 XML 형식으로 문자화하여 브라우저에 전달되며, 브라우저에서는 이를 다시 해석하여 웹 페이지에 업데이트합니다.
+
+//? 서버는 AJAX에게 응답하며, 데이터를 주로 JSON 또는 XML 형식으로 문자화하여 전달합니다. 브라우저에서는 받은 정보를 해석기로 다시 해석하여 웹 페이지에 표시합니다.
+
+//! XHR & Fetch
+//? AJAX 엔진의 종류로는 XMLHttpRequest(XHR)과 Fetch API가 있다.
+
+//? XMLHttpRequest (XHR):
+
+//? XMLHttpRequest는 웹 브라우저에서 비동기적으로 서버와 데이터를 주고받기 위해 사용되는 JavaScript 객체입니다.
+//? 오래된 방식의 AJAX 엔진으로, 오래된 브라우저를 지원하는 데 유용합니다.
+//? 비동기적으로 데이터를 요청하고 응답을 처리할 수 있으며, 웹 페이지를 새로고침하지 않고도 데이터를 업데이트할 수 있습니다.
+//? 사용법이 복잡하고 코드가 장황할 수 있어서 가독성이 떨어지는 단점이 있습니다.
+
+//? Fetch API:
+
+//? Fetch API는 최신 웹 표준으로, 간편하고 사용하기 쉬운 방식으로 비동기적으로 데이터를 주고받을 수 있습니다.
+//? Promise 기반의 구조를 갖고 있어서 비동기적으로 데이터를 처리할 때 더 편리하고 가독성이 좋습니다.
+
+//! xhr을 사용하는 필수요소
+//! xhr.open
+//! xhr.addEventListener(event, callback)
+//! xhr.send
+
+//* XMLHttpRequest 객체는 웹 브라우저에서 서버와 비동기적으로 데이터를 주고받기 위해 사용되는 JavaScript 객체
+//const xhr = new XMLHttpRequest();
+//console.log(xhr.readyState); //* readyState: 0
+
+//? xhr.open(method, url)
+//xhr.open('GET', 'https://jsonplaceholder.typicode.com/users');
+//console.log(xhr.readyState); //* readyState: 1
+
+//* XMLHttpRequest라는 객체가 받아짐!
+//console.log(xhr);
+
+//? onreadystatechange:
+//* onreadystatechange는 XHR 객체의 상태가 변할 때마다 호출되는 이벤트 핸들러입니다.
+//* XHR 객체의 상태가 변경되면 해당 이벤트 핸들러가 호출되어 추가적인 처리를 할 수 있습니다.
+//* 이벤트 핸들러를 등록할 때는 xhr.onreadystatechange 형태로 사용하며, 콜백 함수를 설정하여 상태 변화에 따른 동작을 정의할 수 있습니다.
+
+//? readyState:
+//* readyState는 XHR 객체의 상태를 나타내는 속성입니다.
+//* readyState는 0부터 4까지의 값으로 표현됩니다.
+//* 0: uninitalized(초기화되지 않은 상태) => xhr 객체를 생성하고 open되기 전 상태
+//* 1: loading(로드되지 않은 상태 (open 메서드 호출 후)) => open이후 event가 추가되기 전 상태
+//* 2: loaded(로드된 상태 (send 메서드 호출 후))
+//* 3: inertactive(데이터 수신 중인 상태 (서버에서 응답을 받는 중))
+//* 4: complete(데이터 수신 완료 상태 (서버 응답을 모두 받은 상태))
+
+//xhr.addEventListener('readystatechange', () => {
+//  console.log(xhr.readyState); //* 데이터가 불러와짐에 따라 readyState: 2=>3=>4
+
+//  if (xhr.status >= 200 && xhr.status < 400) {
+//    if (xhr.readyState === 4) {
+//      console.log(xhr.response);
+//    }
+//  } else {
+//    console.log('실패');
+//  }
+//});
+
+//? status:
+//* status는 서버로부터 받은 HTTP 상태 코드를 나타내는 속성입니다.
+//* HTTP 상태 코드는 서버 응답의 성공 여부를 나타내는 숫자로서, 주요 상태 코드에는 200(성공), 404(찾을 수 없음), 500(서버 오류) 등이 있습니다.
+//* status 속성을 통해 서버 응답의 상태를 확인하고 이에 따른 처리를 할 수 있습니다.
+
+//? xhr.send(null | body): send를 호출해야 비동기가 실행됨!
+//xhr.send();
+
+
+
+
+/* //# xhr의 [readystate]
+
+	[readystate]
+
+	0: uninitialized
+	1: loading
+	2: loaded
+	3: interactive
+	4: complete
+
+*/
+
+/* //# xhr의 기본 구조
+//@ 0번
+const xhr = new XMLHttpRequest();
+
+//@ 1번
+xhr.open('GET', 'https://jsonplaceholder.typicode.com/users');
+
+//@ 2번
+xhr.addEventListener('readystatechange', () => {
+
+	const {status, readyState, response} = xhr
+
+	if (status >= 200 && status < 400) {
+		if (readyState === 4) {
+			console.log(JSON.parse(response));
+		}
+	} else {
+		console.log('실패');
+	}
+
+	// console.log(xhr.status);
+
+	// console.log(xhr.readyState);
+})
+
+// console.log(xhr.readyState);
+
+//@ 3번
+xhr.send();
+
+ */
+/* callback------------------------
+------------------------- */
+
+// 객체 구조 분해 할당
+
+export function xhr({ 
+  method = 'GET', 
+  url = '', 
+  onSuccess = null, 
+  onFail = null, 
+  body = null, 
+  headers = {
+  'Content-Type':'application.json',
+  'Access-Control-Allow-Origin':'*'
+  } 
+} = {}) {
+	
+	const xhr = new XMLHttpRequest();
+
+	xhr.open(method, url);
+
+	Object.entries(headers).forEach(([key, value]) => {
+		xhr.setRequestHeader(key, value);
+	})
+	
+	xhr.addEventListener('readystatechange', () => {
+		const {status, readyState, response} = xhr;
+
+		if (readyState === 4) {
+			if (status >= 200 && status < 400) {
+				onSuccess(JSON.parse(response));
+			} else {
+				onFail('실패');
+			}
+		}
+	});
+
+	xhr.send(JSON.stringify(body));
+}
+
+// method, body, header, url , onSuccess, onFail
+
+// xhr({
+// 	method: 'GET',
+// 	url:'https://jsonplaceholder.typicode.com/users',
+// 	onSuccess:()=> {},
+// 	onFail: () => { },
+// 	body: {
+// 		name: 'tiger'
+// 	},
+// 	headers: {
+// 		'Content-Type':'application/json',
+//     'Access-Control-Allow-Origin':'*'
+// 	}
+// });
+
+
+
+
+
+//# ###########
+// 1. 자바스크립트의 함수는 객체다.
+// 2. 사용자(협업개발자) 입장 : 쉽게 쓰자
+// 3. 설계자 -> 함수 안에 메서드(객체)를 넣어버리자 !!
+
+// xhr.get()
+// xhr.post()
+// xhr.put()
+// xhr.delete()
+
+xhr.get = (url, onSuccess, onFail) => {
+	xhr({
+		url,
+		onSuccess,
+		onFail,
+	})
+}
+
+/**
+ * 
+ * @param {*} url 
+ * @param {*} onSuccess 
+ * @param {*} onFail 
+ */
+xhr.post = (url, onSuccess, onFail, body) => {
+	xhr({
+		method:'POST',
+		url,
+		body,
+		onSuccess,
+		onFail,
+	})
+}
+
+xhr.put = (body, url, onSuccess, onFail) => {
+	xhr({
+		method:'PUT',
+		url,
+		body,
+		onSuccess,
+		onFail,
+	})
+}
+
+xhr.delete = (url, onSuccess, onFail) => {
+	xhr({
+		method:'DELETE',
+		url,
+		onSuccess,
+		onFail,
+	})
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,7 +1,19 @@
-console.log('hello js!');
-
-const a = 10;
 
 
-const b = 10;
+// import { xhr } from "./lib/index.js";
+
+ 
+/*	// Promise
+xhr.get('https://www.naver.com')
+	.then((res) => {
+	
+	})
+	.catch((err) => {
+		err
+	})
+
+	xhr.get()
+
+ */
+
 
