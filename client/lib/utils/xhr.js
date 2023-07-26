@@ -1,3 +1,10 @@
+
+
+import { refError } from "../error/refError.js";
+
+
+
+
 //! AJAX란
 //? AJAX(Asynchronous JavaScript and XML)는 웹 페이지에서 비동기적으로 서버와 데이터를 주고받는 기술을 의미한다.
 
@@ -81,8 +88,6 @@
 //xhr.send();
 
 
-
-
 /* //# xhr의 [readystate]
 
 	[readystate]
@@ -131,8 +136,6 @@ xhr.addEventListener('readystatechange', () => {
 xhr.send();
 
  */
-
-
 
 
 /* callback------------------------
@@ -254,10 +257,96 @@ xhr.put = (body, url, onSuccess, onFail) => {
 
 
 
+/* Promise로 xhr 재구성하기 --------------------
+------------------------------------- */
+
+const defaultOptions = {
+	method: 'GET',
+	url: '',
+	body: '',
+	errorMessage: '서버와의 통신이 원할하지 않습니다.',
+	headers: {
+		'Content-Type': 'application/json',
+		'Access-Control-Allow-Origin':'*',
+	}
+}
+
+export function xhrPromise(options) {
+
+	//* mixin
+	const {method, url, body, errorMessage, headers} = {...defaultOptions, ...options}
+	// const config = Object.assign({},defaultOptions,options) 얉은복사를 하는 또다른 방법 (assign메서드)
+
+	if(!url) refError('서버와 통신할 url은 필수값입니다.')
+
+	const xhr = new XMLHttpRequest();
+	
+	xhr.open(method, url);
+	
+	Object.entries(headers).forEach(([key, value]) => {
+		xhr.setRequestHeader(key, value);		// 헤더 설정
+	})
+
+	xhr.send(JSON.stringify(body));	// send는 단순히 보내는 것이기 때문에 순서가 상관없기 때문에 
+																	// 이벤트 보다 위에 있어도 괜찮다. 
+
+	return new Promise((resolve, reject) => {
+
+		xhr.addEventListener('readystatechange', () => {
+			if(xhr.readyState === 4) {
+				if(xhr.status >= 200 && xhr.status < 400) {
+					resolve(JSON.parse(xhr.response))
+				} else {
+					reject({message: '서버와의 통신이 원활하지 않습니다'})
+				}
+			} 
+		})
+	})
+}
+
+
+/* 
+xhrPromise({
+	url: 'https://jsonplaceholder.typicode.com/users'
+})
+	.then((res) => {
+		res.forEach((item) => {
+			console.log(item);
+		})
+	})
+ */
+
+
+xhrPromise.get = (url) => {
+	return xhrPromise({url})
+}
+
+xhrPromise.post = (url, body) => {
+	return xhrPromise({
+		url,
+		body,
+		method:'POST'
+	})
+}
+
+xhrPromise.delete = (url) => {
+	return xhrPromise({
+		url,
+		method:'DELETE'
+	})
+}
+
+xhrPromise.put = (url, body) => {
+	return Promise({
+		url,
+		body,
+		method: 'PUT'
+	})
+}
 
 
 
-
+// console.log(xhrPromise.get('https://jsonplaceholder.typicode.com/users'));
 
 
 
