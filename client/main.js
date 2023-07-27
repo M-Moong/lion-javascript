@@ -18,7 +18,7 @@ function handleTextField() {
 
 
 function init() {
-
+	
 	getStorage('text').then((res) => {
 		textField.value = res;
 	})
