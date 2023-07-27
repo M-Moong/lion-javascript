@@ -91,7 +91,7 @@ function handleDelete(e) {
 	e.preventDefault();
 
 	const button = e.target.closest('button');
-	const article = e.target.closest('article')
+	const article = e.target.closest('article');
 
 	if(!button || !article) return;
 
@@ -110,15 +110,12 @@ function handleDelete(e) {
 }
 
 
-
-
-
-
-
-
-
 userCardInner.addEventListener('click', handleDelete)
 
 
+// 이벤트 위임은 비슷한 방식으로 여러 요소를 다뤄야 할 때 사용됩니다. 
+// 이벤트 위임을 사용하면 요소마다 핸들러를 할당하지 않고,
+// 	요소의 공통 조상에 이벤트 핸들러를 단 하나만 할당해도 여러 요소를 한꺼번에 다룰 수 있습니다.
 
-
+// 공통 조상에 할당한 핸들러에서 event.target을 이용하면 실제 어디서 
+// 이벤트가 발생했는지 알 수 있습니다.이를 이용해 이벤트를 핸들링합니다.;
